@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('img.jpg'); /* Add the calming image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px; /* Add padding for mobile devices */
+            color: #796fdf; /* Change text color to white for better contrast */
+        }
+
+        /* Container for the login form */
+        .login-container {
+            background: linear-gradient(to bottom right, #ffffff, #e0f7fa);
+            padding: 40px;
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+            position: relative;
+            overflow: hidden; /* To keep inner elements from overflowing */
+        }
+
+        /* Decorative effect */
+        .login-container::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            z-index: 0;
+            filter: blur(30px);
+        }
+
+        /* Adjustments for content inside the container */
+        .login-container > * {
+            position: relative; /* Ensure elements are above the blur */
+            z-index: 1; /* Position them above the blur */
+        }
+
+        .login-container:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+        }
+
+        /* Form heading */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #796fdf; /* Teal color for heading */
+            font-weight: 600; /* Bolder font for heading */
+            font-size: 24px; /* Increased font size */
+        }
+
+        /* Input fields */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500; /* Slightly bolder label */
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #796fdf; /* Teal border */
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            border-color: #796fdf; /* Darker teal on focus */
+            box-shadow: 0 0 5px #968eeb; /* Focus shadow effect */
+            outline: none;
+        }
+
+        /* Submit button */
+        button {
+            width: 100%;
+            background-color: #796fdf; /* Teal color for button */
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Button transform */
+        }
+
+        button:hover {
+            background-color: #968eeb; /* Darker teal on hover */
+            transform: translateY(-2px); /* Button lift effect */
+        }
+
+        /* Links (Forgot Password and Sign Up) */
+        p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        p a {
+            color: #796fdf;
+            text-decoration: none;
+            transition: color 0.3s ease; /* Transition for link color */
+        }
+
+        p a:hover {
+            color: #968eeb;/* Change link color on hover */
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 20px; /* Adjusted padding for smaller screens */
+            }
+        }
+        #title{
+            position: absolute;
+            z-index: 500;
+            left: 32%;
+            top: -85px;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+   
+    <div id="title">
+        <h1>Medicare</h1>
+    </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="validateLoginForm(event)">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="abc@gmail.com" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+            <p>New User? <a href="signup.html">Sign Up</a></p>
+        </form>
+    </div>
+
+    <script>
+        function validateLoginForm(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email === "" || password === "") {
+                alert("Please fill out all fields.");
+            } else {
+                alert("Login successful!");
+                window.location.href = "index.html"; // Redirect after successful login
+            }
+        }
+    </script>
+</body>
+</html>

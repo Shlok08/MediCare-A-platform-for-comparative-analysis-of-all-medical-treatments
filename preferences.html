@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Treatment Form</title>
+  <style>
+    /* Base styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('img.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #796fdf;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      border-color: #796fdf;
+      outline: none;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    input[type="submit"] {
+      background-color: #796fdf;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #968eeb;
+    }
+
+    /* Animations */
+    form {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+    }
+
+    /* Additional styles */
+    #severity-label {
+      font-weight: bold;
+      color: #796fdf;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="healthForm">
+    <h2>Health Treatment Form</h2>
+    
+    <label for="budget">Total budget:</label>
+    <input type="number" id="budget" name="budget" min="0" step="50" placeholder="Enter your budget" required>
+  
+    <label for="allergies">Allergies:</label>
+    <input type="text" id="allergies" name="allergies" placeholder="List any allergies">
+  
+    <label for="cureTime">Cure Time (in weeks):</label>
+    <input type="number" id="cureTime" name="cureTime" min="1" placeholder="Enter time">
+  
+    <label for="severity">Severity of Condition:</label>
+    <input type="range" id="severity" name="severity" min="1" max="3" value="1">
+    <span id="severity-label">Mild</span>
+  
+    <label for="sideEffects">Side Effects Sensitivity:</label>
+    <select id="sideEffects" name="sideEffects">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+  
+    <label for="ageGroup">Age Group:</label>
+    <select id="ageGroup" name="ageGroup">
+      <option value="18-30">18-30</option>
+      <option value="31-45">31-45</option>
+      <option value="46+">46+</option>
+    </select>
+  
+
+    <label for="diet">Dietary Preferences:</label>
+    <select id="diet" name="diet">
+      <option value="vegan">Vegan</option>
+      <option value="vegetarian">Vegetarian</option>
+      <option value="nonVegetarian">Non-Vegetarian</option>
+      <option value="eggetarian">Eggetarian</option>
+      <option value="pescatarian">Pescatarian</option>
+      <option value="paleo">Paleo</option>
+      <option value="keto">Keto</option>
+    </select>
+  
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    // Dynamically update severity label based on range value
+    const severityInput = document.getElementById('severity');
+    const severityLabel = document.getElementById('severity-label');
+
+    severityInput.addEventListener('input', function() {
+      switch (severityInput.value) {
+        case '1':
+          severityLabel.textContent = 'Mild';
+          severityLabel.style.color = '#4caf50';
+          break;
+        case '2':
+          severityLabel.textContent = 'Moderate';
+          severityLabel.style.color = '#ffa726';
+          break;
+        case '3':
+          severityLabel.textContent = 'Severe';
+          severityLabel.style.color = '#e53935';
+          break;
+      }
+    });
+
+    // Form submission handling
+    document.getElementById('healthForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent traditional form submission
+
+      // Gather form data
+      const formData = {
+        budget: document.getElementById('budget').value,
+        allergies: document.getElementById('allergies').value,
+        cureTime: document.getElementById('cureTime').value,
+        severity: document.getElementById('severity').value,
+        sideEffects: document.getElementById('sideEffects').value,
+        ageGroup: document.getElementById('ageGroup').value,
+        diet: document.getElementById('diet').value,
+      };
+
+      // Display form data for review (alert as a quick example)
+      alert(`Form submitted successfully with the following data:\n\n${JSON.stringify(formData, null, 2)}`);
+
+      // Redirect to home page or perform additional actions
+      window.location.href = "index.html"; // Change this URL to your home page
+    });
+  </script>
+
+</body>
+</html>

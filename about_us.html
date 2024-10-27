@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('about-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: rgba(121, 111, 223, 0.9); /* Transparent effect to blend with background */
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+      padding: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #968eeb;
+      border-radius: 5px;
+    }
+
+    /* About section styles */
+    .about-section {
+      padding: 50px 20px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background for readability */
+      max-width: 900px;
+      margin: 50px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-section h2 {
+      color: #796fdf;
+      margin-bottom: 30px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .about-section p {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 20px auto;
+      opacity: 0;
+      animation: fadeInText 1.5s forwards ease-in-out;
+      animation-delay: 0.5s; /* Adds delay for the text to appear after the heading */
+    }
+
+    /* Animations */
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about_us.html">About Us</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- About Us Section -->
+  <div class="about-section">
+    <h2>About Us</h2>
+    <p>
+        Welcome to our premier medical platform, where we empower you with the insights you need to confidently navigate your health journey! Our mission is to deliver the latest discoveries in medicine, wellness, and alternative treatments in a clear and approachable way.
+    </p>
+    <p>
+        Whether you’re looking for expert advice on health concerns or practical tips for a vibrant lifestyle, you’re in the right place! Our dedicated team of healthcare professionals and writers is committed to providing high-quality, science-backed solutions tailored just for you.
+    </p>
+    <p>
+        Join us in creating a healthier tomorrow! Your wellness is our priority, and we’re here to support you every step of the way!
+    </p>
+  </div>
+
+</body>
+</html>

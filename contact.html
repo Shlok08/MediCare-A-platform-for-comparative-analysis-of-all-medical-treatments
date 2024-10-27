@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #796fdf;
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+      padding: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #968eeb;
+      border-radius: 5px;
+    }
+
+    .contact-section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      color: #796fdf;
+      margin-bottom: 30px;
+    }
+
+    .contact-section form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-section label {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    .contact-section input[type="text"],
+    .contact-section input[type="email"],
+    .contact-section textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+
+    .contact-section input[type="submit"] {
+      background-color: #796fdf;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+
+    .contact-section input[type="submit"]:hover {
+      background-color: #968eeb;
+    }
+
+    /* Animations */
+    .contact-section {
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Contact Information */
+    .contact-info {
+      margin-top: 40px;
+      text-align: left;
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info h3 {
+      color: #796fdf;
+      margin-bottom: 10px;
+    }
+
+    .contact-info p {
+      color: #333;
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Contact Us Section -->
+  <div class="contact-section">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" required>
+      
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+      
+      <input type="submit" value="Send Message">
+    </form>
+  </div>
+
+  <!-- Contact Information -->
+  <div class="contact-info">
+    <h3>Phone Numbers:</h3>
+    <p>9356179877</p>
+    <p>7208661295</p>
+    <p>696584793</p>
+
+    <h3>Address:</h3>
+    <p>Survey No. 12, 13, Opp. to Hypercity Mall,</p>
+    <p>Kasarvadavli, Ghodbunder Road,</p>
+    <p>Thane West - 400615</p>
+  </div>
+
+</body>
+</html>

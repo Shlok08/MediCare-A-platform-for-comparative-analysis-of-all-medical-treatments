@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare - Treatment Analysis</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Keep this -->
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Dropdown styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            background-image: url('img.jpg'); /* Calming background image */
+            background-size: cover;
+            background-position: center;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .big-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #796fdf;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .big-button:hover {
+            background-color: #85bbf5;
+        }
+
+        .nav-links {
+            position: relative;
+        }
+
+        .treatment-cards {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Treatment Card Styles */
+        .treatment-card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .treatment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Custom Colors for each treatment */
+        .allopathic-card {
+            background-color: #e3f2fd;
+            background-image: url('images.jpg'); /* Calming background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .homeopathic-card {
+            background-color: #e8f5e9;
+            background-image: url('images.jpg'); /* Calming background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ayurvedic-card {
+            background-color: #fff3e0;
+            background-image: url('images.jpg'); /* Calming background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .treatment-card h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .treatment-card ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .treatment-card li {
+            font-size: 1.1em;
+            margin: 8px 0;
+        }
+
+        /* Icons */
+        .treatment-card i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #796fdf;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #rgb(86, 90, 91);;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .treatment-card {
+                width: 80%;
+            }
+        }
+        #logo{
+            position: absolute;
+            z-index: 50;
+            height: 40px;
+            width: 40px;
+            left: -30px;
+            top: -6px;
+            border-radius: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav style="position: relative;">
+            <img id="logo" src="logo.jpg">
+            <h1>Medicare</h1>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="preferences.html">Preferences</a></li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">More</a>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="guided_meditation.html" class="big-button">Guided Meditation</a>
+                        <a href="focused_music.html" class="big-button">Focused Music</a>
+                        <a href="basic_exercises.html" class="big-button">Basic Exercises</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h2>Find the Best Treatment for Your  Problem</h2>
+        <input type="text" id="diseaseInput" placeholder="Enter your problem name" />
+        <button onclick="fetchTreatments()">Search</button>
+
+        <div id="treatmentCards" class="treatment-cards"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 Medicare.</p>
+        <h4><p>Disclaimer: We do not provide direct medical advice. Please consult a doctor for further guidance.</p></h4>
+    </div>
+
+    <script>
+        // Static treatment data with comparisons in Rupees and casual opinions
+        const treatments = {
+            "cold": {
+                allopathic: { 
+                    cost: "₹500", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-3 days", 
+                    sideEffects: "Drowsiness", 
+                    consultationRequired: "Yes",
+                    opinion: "Effective but you might feel sleepy afterward."
+                },
+                homeopathic: { 
+                    cost: "₹800", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "A natural approach, though it might take a bit longer."
+                },
+                ayurvedic: { 
+                    cost: "₹1000", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-6 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Good for those who prefer natural remedies."
+                }
+            },
+            "cough": {
+                allopathic: { 
+                    cost: "₹600", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-4 days", 
+                    sideEffects: "Drowsiness", 
+                    consultationRequired: "Yes",
+                    opinion: "Works quickly but might cause some drowsiness."
+                },
+                homeopathic: { 
+                    cost: "₹900", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "4-6 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural approach but requires patience."
+                },
+                ayurvedic: { 
+                    cost: "₹1100", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "4-7 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "A balanced option for those looking for herbal treatments."
+                }
+            },
+            "fever": {
+                allopathic: { 
+                    cost: "₹700", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-3 days", 
+                    sideEffects: "Fatigue", 
+                    consultationRequired: "Yes",
+                    opinion: "Fast and effective but may leave you tired."
+                },
+                homeopathic: { 
+                    cost: "₹1000", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "Yes", 
+                    consultationRequired: "Optional",
+                    opinion: "Gentle and slow but safe from side effects."
+                },
+                ayurvedic: { 
+                    cost: "₹1200", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "4-6 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Best for those looking for holistic healing."
+                }
+            },
+            "headache": {
+                allopathic: { 
+                    cost: "₹400", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 days", 
+                    sideEffects: "Drowsiness", 
+                    consultationRequired: "Optional",
+                    opinion: "Works fast, but be prepared for a nap!"
+                },
+                homeopathic: { 
+                    cost: "₹600", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "2-4 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Optional",
+                    opinion: "Slow but steady. Good if you want to avoid side effects."
+                },
+                ayurvedic: { 
+                    cost: "₹800", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-3 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Optional",
+                    opinion: "Natural and effective. If you're into holistic health, this is the one."
+                }
+            },
+            "sore throat": {
+                allopathic: { 
+                    cost: "₹500", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-3 days", 
+                    sideEffects: "Drowsiness", 
+                    consultationRequired: "Yes",
+                    opinion: "Relieves quickly, though it might make you sleepy."
+                },
+                homeopathic: { 
+                    cost: "₹700", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural but slow in showing effects."
+                },
+                ayurvedic: { 
+                    cost: "₹900", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-6 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Good for those preferring herbal remedies."
+                }
+            },
+            "indigestion": {
+                allopathic: { 
+                    cost: "₹300", 
+                    effectiveness: "High", 
+                    recoveryTime: "1 day", 
+                    sideEffects: "Nausea", 
+                    consultationRequired: "Yes",
+                    opinion: "Works fast but may cause some nausea."
+                },
+                homeopathic: { 
+                    cost: "₹500", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "2-3 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Mild and effective over time."
+                },
+                ayurvedic: { 
+                    cost: "₹700", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Herbal solution for quick relief."
+                }
+            },
+            "muscle strain": {
+                allopathic: { 
+                    cost: "₹1000", 
+                    effectiveness: "High", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "Pain relievers may cause stomach upset", 
+                    consultationRequired: "Yes",
+                    opinion: "Quick relief with medication, but watch out for stomach issues."
+                },
+                homeopathic: { 
+                    cost: "₹1500", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "5-7 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural approach without side effects, but takes a bit longer."
+                },
+                ayurvedic: { 
+                    cost: "₹1800", 
+                    effectiveness: "High", 
+                    recoveryTime: "3-6 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Effective herbal treatments to soothe your muscles."
+                }
+            },
+            "acne": {
+                allopathic: { 
+                    cost: "₹800", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-4 weeks", 
+                    sideEffects: "Skin dryness and irritation", 
+                    consultationRequired: "Yes",
+                    opinion: "Effective treatments but may dry out your skin."
+                },
+                homeopathic: { 
+                    cost: "₹1200", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "4-6 weeks", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Gentle on the skin, but requires patience for results."
+                },
+                ayurvedic: { 
+                    cost: "₹1500", 
+                    effectiveness: "High", 
+                    recoveryTime: "3-5 weeks", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural and effective for clearer skin."
+                }
+            },
+            "mild allergies": {
+                allopathic: { 
+                    cost: "₹700", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 days", 
+                    sideEffects: "Drowsiness", 
+                    consultationRequired: "Yes",
+                    opinion: "Quick relief but may make you feel sleepy."
+                },
+                homeopathic: { 
+                    cost: "₹1000", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural approach without side effects, but takes a bit longer."
+                },
+                ayurvedic: { 
+                    cost: "₹1300", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-4 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Herbal remedies that work effectively and naturally."
+                }
+            },
+            "back pain": {
+                allopathic: { 
+                    cost: "₹1000", 
+                    effectiveness: "High", 
+                    recoveryTime: "3-7 days", 
+                    sideEffects: "Drowsiness, stomach upset", 
+                    consultationRequired: "Yes",
+                    opinion: "Effective pain relief but may have some side effects."
+                },
+                homeopathic: { 
+                    cost: "₹1500", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "5-10 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Gentle and natural, but requires patience."
+                },
+                ayurvedic: { 
+                    cost: "₹1800", 
+                    effectiveness: "High", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Herbal treatments to relieve pain effectively."
+                }
+            },
+            "constipation": {
+                allopathic: { 
+                    cost: "₹400", 
+                    effectiveness: "High", 
+                    recoveryTime: "1 day", 
+                    sideEffects: "Possible dependency on laxatives", 
+                    consultationRequired: "Yes",
+                    opinion: "Quick relief but be cautious of long-term use."
+                },
+                homeopathic: { 
+                    cost: "₹700", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "2-3 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural and safe, but takes a bit longer."
+                },
+                ayurvedic: { 
+                    cost: "₹900", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Effective herbal remedies for quick relief."
+                }
+            },
+            "sunburn": {
+                allopathic: { 
+                    cost: "₹500", 
+                    effectiveness: "High", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "Possible skin irritation", 
+                    consultationRequired: "Yes",
+                    opinion: "Soothes the skin quickly but may cause some irritation."
+                },
+                homeopathic: { 
+                    cost: "₹800", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "4-6 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Gentle and natural, but takes a bit longer to heal."
+                },
+                ayurvedic: { 
+                    cost: "₹1000", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-4 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Herbal treatments that quickly soothe sunburned skin."
+                }
+            },
+            "insomnia": {
+                allopathic: { 
+                    cost: "₹1000", 
+                    effectiveness: "High", 
+                    recoveryTime: "1 night", 
+                    sideEffects: "Drowsiness next day", 
+                    consultationRequired: "Yes",
+                    opinion: "Quick fix but may make you feel groggy the next day."
+                },
+                homeopathic: { 
+                    cost: "₹1300", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "2-3 weeks", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural approach without side effects, but takes time to work."
+                },
+                ayurvedic: { 
+                    cost: "₹1500", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 weeks", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Herbal remedies that promote natural sleep."
+                }
+            },
+            "minor cuts or scrapes": {
+                allopathic: { 
+                    cost: "₹200", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 days", 
+                    sideEffects: "Possible allergic reactions to ointments", 
+                    consultationRequired: "Yes",
+                    opinion: "Quick healing but watch out for any allergic reactions."
+                },
+                homeopathic: { 
+                    cost: "₹400", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "2-3 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Safe and natural, but might take a little longer to heal."
+                },
+                ayurvedic: { 
+                    cost: "₹600", 
+                    effectiveness: "High", 
+                    recoveryTime: "1-2 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Effective herbal treatments for quick healing."
+                }
+            },
+            "heartburn": {
+                allopathic: { 
+                    cost: "₹500", 
+                    effectiveness: "High", 
+                    recoveryTime: "1 day", 
+                    sideEffects: "Possible headaches, dizziness", 
+                    consultationRequired: "Yes",
+                    opinion: "Fast relief but may come with a few side effects."
+                },
+                homeopathic: { 
+                    cost: "₹800", 
+                    effectiveness: "Moderate", 
+                    recoveryTime: "3-5 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Natural and safe, but takes some time to work."
+                },
+                ayurvedic: { 
+                    cost: "₹1000", 
+                    effectiveness: "High", 
+                    recoveryTime: "2-4 days", 
+                    sideEffects: "None", 
+                    consultationRequired: "Yes",
+                    opinion: "Herbal solutions that effectively relieve heartburn."
+                }
+            }
+        };
+
+        // Function to fetch and display treatments based on disease input
+        function fetchTreatments() {
+            const disease = document.getElementById("diseaseInput").value.toLowerCase().trim();
+            const treatmentCards = document.getElementById("treatmentCards");
+            treatmentCards.innerHTML = ""; // Clear previous results
+
+            if (treatments[disease]) {
+                const treatmentOptions = treatments[disease];
+                const comparisonContainer = document.createElement("div");
+                comparisonContainer.classList.add("comparison-container");
+
+                for (const [type, details] of Object.entries(treatmentOptions)) {
+                    const card = document.createElement("div");
+                    card.classList.add("treatment-card", `${type}-card`); // Adding dynamic class for styles
+                    card.innerHTML = `
+                        <i class="fas ${getIconForTreatment(type)}"></i>
+                        <h3>${type.charAt(0).toUpperCase() + type.slice(1)} Treatment</h3>
+                        <ul>
+                            <li><strong>Cost:</strong> ${details.cost}</li>
+                            <li><strong>Effectiveness:</strong> ${details.effectiveness}</li>
+                            <li><strong>Recovery Time:</strong> ${details.recoveryTime}</li>
+                            <li><strong>Side Effects:</strong> ${details.sideEffects}</li>
+                            <li><strong>Consultation Required:</strong> ${details.consultationRequired}</li>
+                            <li><strong>Opinion:</strong> ${details.opinion}</li>
+                        </ul>
+                    `;
+                    comparisonContainer.appendChild(card);
+                }
+
+                treatmentCards.appendChild(comparisonContainer);
+            } else {
+                treatmentCards.innerHTML = "<p>No treatments found for the entered Problem.</p>";
+            }
+        }
+
+        // Function to toggle the dropdown menu
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownContent");
+            dropdown.classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        // Function to get an icon based on treatment type
+        function getIconForTreatment(type) {
+            switch(type) {
+                case 'allopathic': return 'fa-pills'; // Icon for allopathy
+                case 'homeopathic': return 'fa-leaf';  // Icon for homeopathy
+                case 'ayurvedic': return 'fa-seedling'; // Icon for ayurveda
+                default: return 'fa-medkit'; // Generic icon
+            }
+        }
+    </script>
+</body>
+</html>

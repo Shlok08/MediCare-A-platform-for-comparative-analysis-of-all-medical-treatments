@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('img.jpg'); /* Add the calming image */
+
+        }
+
+        .signup-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #796fdf;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #796fdf;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            background-color: #796fdf;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #968eeb;
+        }
+
+        @media (max-width: 500px) {
+            .signup-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm" onsubmit="validateSignupForm(event)">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required min="18" max="100">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="\d{10}">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="abc@gmail.com" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required minlength="8">
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function validateSignupForm(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const age = parseInt(document.getElementById('age').value.trim(), 10);
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            const namePattern = /^[a-zA-Z\s]+$/;
+            if (!namePattern.test(fullName)) {
+                alert("Full Name must contain only letters and spaces.");
+                return false;
+            }
+            
+            if (age < 18 || age > 100) {
+                alert("Please enter a valid age between 18 and 100.");
+                return false;
+            }
+
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phoneNumber)) {
+                alert("Phone Number must be exactly 10 digits.");
+                return false;
+            }
+
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+
+            alert("Sign-up successful!");
+            window.location.href = "index.html"; // Redirect after successful signup
+        }
+    </script>
+</body>
+</html>

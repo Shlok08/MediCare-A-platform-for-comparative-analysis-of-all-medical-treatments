@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Blogs</title>
+  <style>
+    /* Base styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('1234.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: rgba(121, 111, 223, 0.9); /* Slight transparency to blend with background */
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+      padding: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #968eeb;
+      border-radius: 5px;
+    }
+
+    /* Blog section styles */
+    .blogs-section {
+      padding: 50px 20px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .blogs-section h2 {
+      color: #796fdf;
+      margin-bottom: 30px;
+    }
+
+    .blog-card {
+      background-color: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: scale(1.05);
+    }
+
+    .blog-card a {
+      text-decoration: none;
+      color: #796fdf;
+      font-size: 18px;
+    }
+
+    /* Animations */
+    .blogs-section {
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+      }
+
+      .blog-card {
+        padding: 15px;
+        margin: 15px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about_us.html">About</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Blogs Section -->
+  <div class="blogs-section">
+    <h2>Dive Into These Must-Read Medical Blogs — Your Health Journey Starts Here!</h2>
+
+    <div class="blog-card">
+      <a href="https://www.webmd.com/blogs">WebMD Blogs</a>
+      <p>Expert medical advice, health tips, and the latest updates on various medical conditions.</p>
+    </div>
+
+    <div class="blog-card">
+      <a href="https://www.mayoclinic.org/blogs">Mayo Clinic Health Blog</a>
+      <p>Stay informed with health and wellness tips from the experts at Mayo Clinic.</p>
+    </div>
+
+    <div class="blog-card">
+      <a href="https://www.healthline.com/health/health-bloggers">Healthline Blogs</a>
+      <p>Discover insightful posts about health conditions, treatments, and lifestyle changes.</p>
+    </div>
+
+    <div class="blog-card">
+      <a href="https://www.kevinmd.com/blog/">KevinMD - Physician's Blog</a>
+      <p>Doctors' opinions and perspectives on healthcare, patient experiences, and medical advice.</p>
+    </div>
+
+    <div class="blog-card">
+      <a href="https://www.everydayhealth.com/blogs/">Everyday Health Blog</a>
+      <p>Trusted health information and advice on living a healthier, happier life.</p>
+    </div>
+  </div>
+
+</body>
+</html>
